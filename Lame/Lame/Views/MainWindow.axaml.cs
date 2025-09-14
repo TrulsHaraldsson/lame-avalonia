@@ -28,6 +28,9 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
             
             this.BindCommand(ViewModel, vm => vm.CommandExitApplication, v => v.MenuItemExit)
                 .DisposeWith(disposables);
+            
+            this.BindCommand(ViewModel, vm => vm.CommandLogout, v => v.MenuItemLogout)
+                .DisposeWith(disposables);
         });
     }
     

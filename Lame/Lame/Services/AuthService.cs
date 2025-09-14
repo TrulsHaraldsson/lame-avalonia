@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Splat;
 
 namespace Lame.Services;
 
-public class AuthService : IAuthService
+public class AuthService : IAuthService, IEnableLogger
 {
 
     public event EventHandler<bool>? IsLoggedInChanged;
@@ -12,9 +13,12 @@ public class AuthService : IAuthService
     {
         if (username == "truls")
         {
+            this.Log().Info("Login succesful");
             IsLoggedInChanged?.Invoke(this, true);
             return true;
         } 
+        
+        this.Log().Info("Login failed");
         IsLoggedInChanged?.Invoke(this, false);
         return false;
     }
@@ -26,6 +30,7 @@ public class AuthService : IAuthService
 
     public void Logout()
     {
+        this.Log().Info("Logout succesful");
         IsLoggedInChanged?.Invoke(this, false);
     }
 }

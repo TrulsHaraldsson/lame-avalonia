@@ -50,6 +50,7 @@ public partial class App : Application, IEnableLogger
     private void ConfigureLogger()
     {
         Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
             .WriteTo.Console()
             .CreateLogger();
     }

@@ -4,6 +4,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Lame.About;
 using Lame.Services;
 using ReactiveUI;
+using Splat;
 
 namespace Lame.ViewModels;
 
@@ -15,10 +16,15 @@ public class MainWindowViewModel : ViewModelBase
     public ViewModelBase CurrentViewModel
     {
         get => _currentViewModel;
-        set => this.RaiseAndSetIfChanged(ref _currentViewModel, value);
+        set
+        {
+            this.Log().Debug($"CurrentVeiwModel set to {value.GetType().Name}");
+            this.RaiseAndSetIfChanged(ref _currentViewModel, value);
+        }
     }
 
     public readonly ReactiveCommand<Unit, Unit> CommandExitApplication;
+    public readonly ReactiveCommand<Unit, Unit> CommandLogout;
 
     public MainWindowViewModel(
         IAuthService authService,
@@ -42,6 +48,12 @@ public class MainWindowViewModel : ViewModelBase
             {
                 lifetime.Shutdown();
             }
+        });
+        
+        CommandLogout = ReactiveCommand.Create(() =>
+        {
+            this.Log().Debug("CommandLogout executed");
+            authService.Logout();
         });
     }
 }
