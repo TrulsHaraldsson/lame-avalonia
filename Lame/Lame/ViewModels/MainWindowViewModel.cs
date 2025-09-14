@@ -1,10 +1,14 @@
-﻿using Lame.Services;
+﻿using Lame.About;
+using Lame.Services;
 using ReactiveUI;
+using Splat;
 
 namespace Lame.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase
 {
+    private readonly LoginViewModel _loginViewModel;
+    private readonly AboutViewModel _aboutViewModel;
     private ViewModelBase _currentViewModel = null!;
     public ViewModelBase CurrentViewModel
     {
@@ -12,8 +16,20 @@ public class MainWindowViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _currentViewModel, value);
     }
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(
+        IAuthService authService,
+        LoginViewModel loginViewModel,
+        AboutViewModel aboutViewModel)
     {
-        CurrentViewModel = new LoginViewModel(new AuthService());
+        _loginViewModel = loginViewModel;
+        _aboutViewModel = aboutViewModel;
+        CurrentViewModel = _loginViewModel;
+
+        authService.IsLoggedInChanged += (_, b) =>
+        {
+            CurrentViewModel = b
+                ? _aboutViewModel
+                : _loginViewModel;
+        };
     }
 }
