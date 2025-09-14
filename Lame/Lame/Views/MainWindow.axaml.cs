@@ -1,6 +1,8 @@
 using System;
 using Avalonia.ReactiveUI;
 using System.Reactive.Disposables;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Lame.ViewModels;
 using ReactiveUI;
 
@@ -24,5 +26,23 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
                 })
                 .DisposeWith(disposables);
         });
+    }
+    
+    private void OnHamburgerClick(object? sender, RoutedEventArgs e)
+    {
+        Hamburger.Content = new TextBlock
+        {
+            Text = "File"
+        };
+    }
+
+    private void OnHamburgerFlyoutClosed(object? sender, EventArgs e)
+    {
+        var icon = new IconPacks.Avalonia.Material.PackIconMaterial
+        {
+            Kind = IconPacks.Avalonia.Material.PackIconMaterialKind.Menu
+        };
+        
+        Hamburger.Content = icon;
     }
 }

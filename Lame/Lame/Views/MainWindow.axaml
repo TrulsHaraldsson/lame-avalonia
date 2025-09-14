@@ -3,18 +3,54 @@
         xmlns:vm="using:Lame.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Lame.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="Lame">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
-    <ContentControl x:Name="MainContent"></ContentControl>
+    <DockPanel 
+        LastChildFill="True">
+        
+        <Panel 
+            x:Name="Header"
+            DockPanel.Dock="Top"
+            Background="LightGray">
+            
+            <StackPanel
+                Orientation="Horizontal"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                Height="40"
+                Spacing="10"
+                Margin="0,0">
+                
+                <Button x:Name="Hamburger"
+                        Background="LightGray"
+                        Content="{iconPacks:Material Menu}" Click="OnHamburgerClick">
+                    
+                    <Button.Flyout>
+                        <MenuFlyout
+                            Placement="BottomEdgeAlignedLeft" 
+                            ShowMode="Standard"
+                            Closed="OnHamburgerFlyoutClosed">
+                            
+                            <MenuItem x:Name="MenuItemSettings" Header="Settings" Icon="{iconPacks:Material CogOutline}"></MenuItem>
+                            <MenuItem x:Name="MenuItemLogout" Header="Logout" Icon="{iconPacks:Material Logout}"/>
+                            <Separator/>
+                            <MenuItem x:Name="MenuItemExit" Header="Exit"/>  
+                            
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+                
+            </StackPanel>
+            
+        </Panel>
+        
+        <ContentControl x:Name="MainContent"></ContentControl>
+        
+    </DockPanel>
 
 </Window>
