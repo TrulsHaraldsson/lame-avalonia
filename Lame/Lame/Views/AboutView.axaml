@@ -1,0 +1,53 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Lame.About.AboutView">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Section -->
+        <Border Grid.Row="0" Background="#2D89EF" Padding="20">
+            <TextBlock Text="About This Project"
+                       FontSize="36"
+                       Foreground="White"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"/>
+        </Border>
+
+        <!-- Content Section -->
+        <ScrollViewer Grid.Row="1" Padding="20">
+            <StackPanel Spacing="15">
+                <!-- Introduction -->
+                <TextBlock Text="Learning Avalonia and ReactiveUI"
+                           FontSize="28"
+                           FontWeight="SemiBold"
+                           Foreground="#2D89EF"/>
+
+                <TextBlock Text="This project is a hands-on learning journey exploring Avalonia's cross-platform capabilities alongside the ReactiveUI framework."
+                           FontSize="16" TextWrapping="Wrap"/>
+
+                <!-- Why Choose Avalonia -->
+                <TextBlock Text="Why Avalonia?"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="#2D89EF" Margin="0,20,0,0"/>
+                <TextBlock Text="Avalonia is an open-source framework for creating cross-platform .NET apps with native look and feel, providing flexibility and consistent performance across Windows, macOS, and Linux."
+                           FontSize="16" TextWrapping="Wrap"/>
+
+                <!-- Why Use ReactiveUI -->
+                <TextBlock Text="Why ReactiveUI?"
+                           FontSize="24"
+                           FontWeight="SemiBold"
+                           Foreground="#2D89EF" Margin="0,20,0,0"/>
+                <TextBlock Text="ReactiveUI simplifies building complex, testable, and composable applications with its reactive programming approach, making it a perfect fit with Avalonia."
+                           FontSize="16" TextWrapping="Wrap"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
