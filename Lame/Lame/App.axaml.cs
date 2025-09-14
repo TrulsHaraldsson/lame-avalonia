@@ -5,11 +5,13 @@ using Lame.About;
 using Lame.Services;
 using Lame.ViewModels;
 using Lame.Views;
+using Serilog;
 using Splat;
+using Splat.Serilog;
 
 namespace Lame;
 
-public partial class App : Application
+public partial class App : Application, IEnableLogger
 {
     public override void Initialize()
     {
@@ -18,7 +20,9 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        ConfigureLogger();
         Locator.CurrentMutable.InitializeSplat();
+        Locator.CurrentMutable.UseSerilogFullLogger();
         
         RegisterDependencies();
         
@@ -28,11 +32,28 @@ public partial class App : Application
             {
                 DataContext = Locator.Current.GetService<MainWindowViewModel>()!
             };
+
+            desktop.Exit += (_, _) =>
+            {
+                this.Log().Info("Exiting application");
+            };
+            
+            desktop.Startup += (_, _) =>
+            {
+                this.Log().Info("Starting application");
+            };
         }
 
         base.OnFrameworkInitializationCompleted();
     }
-    
+
+    private void ConfigureLogger()
+    {
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .CreateLogger();
+    }
+
     private void RegisterDependencies()
     {
         // Services 

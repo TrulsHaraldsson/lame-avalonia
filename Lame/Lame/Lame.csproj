@@ -25,5 +25,7 @@
         </PackageReference>
         <PackageReference Include="Avalonia.ReactiveUI" Version="11.3.5"/>
         <PackageReference Include="IconPacks.Avalonia.Material" Version="1.2.0" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+        <PackageReference Include="Splat.Serilog" Version="15.1.1" />
     </ItemGroup>
 </Project>
