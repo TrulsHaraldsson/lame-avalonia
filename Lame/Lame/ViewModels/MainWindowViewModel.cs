@@ -23,6 +23,7 @@ public class MainWindowViewModel : ViewModelBase
         }
     }
 
+    public readonly ReactiveCommand<Unit, Unit> CommandOpenSettings;
     public readonly ReactiveCommand<Unit, Unit> CommandExitApplication;
     public readonly ReactiveCommand<Unit, Unit> CommandLogout;
 
@@ -54,6 +55,18 @@ public class MainWindowViewModel : ViewModelBase
         {
             this.Log().Debug("CommandLogout executed");
             authService.Logout();
+        });
+        
+        CommandOpenSettings = ReactiveCommand.Create(() =>
+        {
+            this.Log().Debug("CommandOpenSettings executed");
+            var settingsWindow = new Views.SettingsView();
+            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                settingsWindow.DataContext = new ViewModels.SettingsViewModel();
+                settingsWindow.Show(desktop.MainWindow!);
+            }
+
         });
     }
 }
