@@ -12,16 +12,17 @@
 
     <DockPanel LastChildFill="True">
         <TreeView Margin="10"
+                  MaxWidth="200"
+                  Width="200"
                   ItemsSource="{Binding Nodes}" 
                   SelectedItems="{Binding SelectedNodes}"
                   SelectionMode="Multiple">
             <TreeView.ItemTemplate>
                 <TreeDataTemplate ItemsSource="{Binding SubNodes}">
-                    <Border HorizontalAlignment="Left"
-                            BorderBrush="Gray" BorderThickness="1"
-                            CornerRadius="5" Padding="15 3">
-                        <TextBlock Text="{Binding Title}" />
-                    </Border>
+                    <TextBlock Text="{Binding Title}" 
+                               Padding="10 3" 
+                               FontSize="14"
+                               VerticalAlignment="Center" />
                 </TreeDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
