@@ -2,18 +2,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lame.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Lame.Views.SettingsView"
+        x:DataType="local:SettingsViewModel"
         Width="600"
         Height="500"
         Title="Settings">
 
-    <ComboBox Name="Options">
-        <!-- You must specify the ItemTemplate when using Bind() methods in ReactiveUI -->
-        <ComboBox.ItemTemplate>
-            <DataTemplate>
-                <TextBlock Text="{Binding}"/>
-            </DataTemplate>
-        </ComboBox.ItemTemplate>
-    </ComboBox>
+    <DockPanel LastChildFill="True">
+        <TreeView Margin="10"
+                  ItemsSource="{Binding Nodes}" 
+                  SelectedItems="{Binding SelectedNodes}"
+                  SelectionMode="Multiple">
+            <TreeView.ItemTemplate>
+                <TreeDataTemplate ItemsSource="{Binding SubNodes}">
+                    <Border HorizontalAlignment="Left"
+                            BorderBrush="Gray" BorderThickness="1"
+                            CornerRadius="5" Padding="15 3">
+                        <TextBlock Text="{Binding Title}" />
+                    </Border>
+                </TreeDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <ComboBox Name="Options">
+            <!-- You must specify the ItemTemplate when using Bind() methods in ReactiveUI -->
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>    
+    </DockPanel>
+    
 </Window>
