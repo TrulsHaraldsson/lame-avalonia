@@ -15,6 +15,8 @@ public partial class SettingsView : ReactiveWindow<SettingsViewModel>
         {
             this.OneWayBind(ViewModel, vm => vm.Options, v => v.Options.ItemsSource)
                 .DisposeWith(disposables);
+            this.Bind(ViewModel, vm => vm.SelectedNode, v => v.TreeViewSettings.SelectedItem)
+                .DisposeWith(disposables);
         });
     }
 }

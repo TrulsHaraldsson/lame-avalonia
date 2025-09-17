@@ -9,6 +9,8 @@ public class SettingsViewModel : ViewModelBase
 
     public ObservableCollection<Node> Nodes { get; }
     public ObservableCollection<Node> SelectedNodes { get; }
+
+    public Node SelectedNode { get; set; }
     
     public SettingsViewModel()
     {

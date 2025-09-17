@@ -11,12 +11,12 @@
         Title="Settings">
 
     <DockPanel LastChildFill="True">
-        <TreeView Margin="10"
+        <TreeView Name="TreeViewSettings"
+                  Margin="10"
                   MaxWidth="200"
                   Width="200"
                   ItemsSource="{Binding Nodes}" 
-                  SelectedItems="{Binding SelectedNodes}"
-                  SelectionMode="Multiple">
+                  SelectionMode="Single">
             <TreeView.ItemTemplate>
                 <TreeDataTemplate ItemsSource="{Binding SubNodes}">
                     <TextBlock Text="{Binding Title}" 
