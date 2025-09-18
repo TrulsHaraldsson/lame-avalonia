@@ -69,7 +69,8 @@ public partial class App : Application, IEnableLogger
             () => new MainWindowViewModel(
                 Locator.Current.GetService<IAuthService>()!,
                 Locator.Current.GetService<LoginViewModel>()!, 
-                Locator.Current.GetService<AboutViewModel>()!),
+                Locator.Current.GetService<AboutViewModel>()!, 
+                Locator.Current.GetService<LiveDataViewModel>()!),
             typeof(MainWindowViewModel));
         Locator.CurrentMutable.RegisterLazySingleton(
             () => new LoginViewModel(Locator.Current.GetService<IAuthService>()!), typeof(LoginViewModel));

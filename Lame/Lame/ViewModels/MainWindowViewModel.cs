@@ -12,6 +12,7 @@ public class MainWindowViewModel : ViewModelBase
 {
     private readonly LoginViewModel _loginViewModel;
     private readonly AboutViewModel _aboutViewModel;
+    private readonly LiveDataViewModel _liveDataViewModel;
     private ViewModelBase _currentViewModel = null!;
     public ViewModelBase CurrentViewModel
     {
@@ -26,20 +27,24 @@ public class MainWindowViewModel : ViewModelBase
     public readonly ReactiveCommand<Unit, Unit> CommandOpenSettings;
     public readonly ReactiveCommand<Unit, Unit> CommandExitApplication;
     public readonly ReactiveCommand<Unit, Unit> CommandLogout;
+    public readonly ReactiveCommand<Unit, Unit> CommandShowAboutPage;
+    public readonly ReactiveCommand<Unit, Unit> CommandShowLiveData;
 
     public MainWindowViewModel(
         IAuthService authService,
         LoginViewModel loginViewModel,
-        AboutViewModel aboutViewModel)
+        AboutViewModel aboutViewModel,
+        LiveDataViewModel liveDataViewModel)
     {
         _loginViewModel = loginViewModel;
         _aboutViewModel = aboutViewModel;
+        _liveDataViewModel = liveDataViewModel;
         CurrentViewModel = _loginViewModel;
 
         authService.IsLoggedInChanged += (_, b) =>
         {
             CurrentViewModel = b
-                ? Locator.Current.GetService<LiveDataViewModel>()!
+                ? liveDataViewModel
                 : _loginViewModel;
         };
 
@@ -66,7 +71,16 @@ public class MainWindowViewModel : ViewModelBase
                 settingsWindow.DataContext = new ViewModels.SettingsViewModel();
                 settingsWindow.Show(desktop.MainWindow!);
             }
+        });
 
+        CommandShowAboutPage = ReactiveCommand.Create(() =>
+        {
+            CurrentViewModel = _aboutViewModel;
+        });
+        
+        CommandShowLiveData = ReactiveCommand.Create(() =>
+        {
+            CurrentViewModel = _liveDataViewModel;
         });
     }
 }

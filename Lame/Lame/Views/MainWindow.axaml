@@ -37,6 +37,8 @@
                             Closed="OnHamburgerFlyoutClosed">
                             
                             <MenuItem x:Name="MenuItemSettings" Header="Settings" Icon="{iconPacks:Material CogOutline}"></MenuItem>
+                            <MenuItem x:Name="MenuItemLiveData" Header="Live data" Icon="{iconPacks:Material FlashOutline}"></MenuItem>
+                            <MenuItem x:Name="MenuItemAbout" Header="About" Icon="{iconPacks:Material InformationOutline}"></MenuItem>
                             <MenuItem x:Name="MenuItemLogout" Header="Logout" Icon="{iconPacks:Material Logout}"/>
                             <Separator/>
                             <MenuItem x:Name="MenuItemExit" Header="Exit"/>  

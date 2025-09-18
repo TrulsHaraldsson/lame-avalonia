@@ -8,16 +8,19 @@ namespace Lame.Test.ViewModels;
 public class TestMainViewModel
 {
     Mock<IAuthService> _authService = null!;
+    Mock<ILiveDataService> _liveDataService = null!;
     private MainWindowViewModel _vm;
 
     [SetUp]
     public void Setup()
     {
         _authService = new Mock<IAuthService>();
+        _liveDataService = new Mock<ILiveDataService>();
         _vm = new MainWindowViewModel(
             _authService.Object, 
             new LoginViewModel(_authService.Object),
-            new AboutViewModel());
+            new AboutViewModel(),
+            new LiveDataViewModel(_liveDataService.Object));
     }
     
     [Test]
@@ -35,8 +38,7 @@ public class TestMainViewModel
         _authService.Raise(m => m.IsLoggedInChanged += null, _authService.Object, true);
         
         // Assert
-        Assert.That(_vm.CurrentViewModel, Is.TypeOf<AboutViewModel>(), 
+        Assert.That(_vm.CurrentViewModel, Is.TypeOf<LiveDataViewModel>(), 
             "Expected the AboutViewModel to be set after login.");
-        
     }
 }

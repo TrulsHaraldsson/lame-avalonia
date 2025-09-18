@@ -28,10 +28,13 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
             
             this.BindCommand(ViewModel, vm => vm.CommandExitApplication, v => v.MenuItemExit)
                 .DisposeWith(disposables);
-            
             this.BindCommand(ViewModel, vm => vm.CommandLogout, v => v.MenuItemLogout)
                 .DisposeWith(disposables);
             this.BindCommand(ViewModel, vm => vm.CommandOpenSettings, v => v.MenuItemSettings)
+                .DisposeWith(disposables);
+            this.BindCommand(ViewModel, vm => vm.CommandShowAboutPage, v => v.MenuItemAbout)
+                .DisposeWith(disposables);
+            this.BindCommand(ViewModel, vm => vm.CommandShowLiveData, v => v.MenuItemLiveData)
                 .DisposeWith(disposables);
         });
     }
