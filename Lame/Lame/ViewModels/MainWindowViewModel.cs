@@ -39,7 +39,7 @@ public class MainWindowViewModel : ViewModelBase
         authService.IsLoggedInChanged += (_, b) =>
         {
             CurrentViewModel = b
-                ? _aboutViewModel
+                ? Locator.Current.GetService<LiveDataViewModel>()!
                 : _loginViewModel;
         };
 
